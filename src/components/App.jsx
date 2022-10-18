@@ -1,32 +1,31 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
+
 import { Feedback } from './Feedback';
 
-export class App extends Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+export const App = () => {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+
+  const countGoodFeedback = () => {
+    setGood(prevGood => prevGood + 1);
   };
 
-  countFeedback = e => {
-    this.setState(prevState => {
-      const keys = Object.keys(prevState);
-      const element = keys.filter(key => key === e.target.name);
-      return {
-        [e.target.name]: prevState[element] + 1,
-      };
-    });
+  const countNeutralFeedback = () => {
+    setNeutral(prevNeutral => prevNeutral + 1);
   };
 
-  countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
+  const countBadFeedback = () => {
+    setBad(prevBad => prevBad + 1);
+  };
+
+  const countTotalFeedback = () => {
     let total = 0;
     total = good + neutral + bad;
     return total;
   };
 
-  countPositiveFeedbackPercentage = () => {
-    const { good, neutral, bad } = this.state;
+  const countPositiveFeedbackPercentage = () => {
     let positive = 0;
     positive = Math.round((good / (good + neutral + bad)) * 100)
       ? Math.round((good / (good + neutral + bad)) * 100)
@@ -34,17 +33,19 @@ export class App extends Component {
     return positive;
   };
 
-  render() {
-    const total = this.countTotalFeedback();
-    return (
-      <>
-        <Feedback
-          options={this.state}
-          countFeedback={this.countFeedback}
-          total={total}
-          countPositiveFeedbackPercentage={this.countPositiveFeedbackPercentage}
-        />
-      </>
-    );
-  }
-}
+  const total = countTotalFeedback();
+  return (
+    <>
+      <Feedback
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        countGoodFeedback={countGoodFeedback}
+        countBadFeedback={countBadFeedback}
+        countNeutralFeedback={countNeutralFeedback}
+        total={total}
+        countPositiveFeedbackPercentage={countPositiveFeedbackPercentage}
+      />
+    </>
+  );
+};

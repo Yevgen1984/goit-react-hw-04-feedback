@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Statistics } from './Statistics/Statistics';
 import { FeedbackOption } from './FeedbackOptions/FeedbackOptions';
@@ -5,21 +6,34 @@ import { Section } from './Section/SectionTitle';
 import { Notification } from './Notification/Notification';
 
 export const Feedback = ({
-  options,
-  countFeedback,
+  good,
+  neutral,
+  bad,
+  countGoodFeedback,
+  countNeutralFeedback,
+  countBadFeedback,
   total,
   countPositiveFeedbackPercentage,
 }) => {
   return (
     <>
       <Section title="Please leave feedback">
-        <FeedbackOption onLeaveFeedback={countFeedback} options={options} />
+        <FeedbackOption
+          onLeaveGoodFeedback={countGoodFeedback}
+          onLeaveNeutralFeedback={countNeutralFeedback}
+          onLeaveBadFeedback={countBadFeedback}
+          good={good}
+          neutral={neutral}
+          bad={bad}
+        />
       </Section>
       <Section title="Statistics">
         {total ? (
           <Statistics
             total={total}
-            options={options}
+            good={good}
+            neutral={neutral}
+            bad={bad}
             positivePercentage={countPositiveFeedbackPercentage}
           />
         ) : (
