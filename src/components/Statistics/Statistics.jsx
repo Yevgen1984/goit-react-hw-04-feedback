@@ -16,7 +16,7 @@ export const Statistics = ({
         <li className={s.statisticsItem}>Bad: {bad}</li>
         <li className={s.statisticsItem}>Total: {total}</li>
         <li className={s.statisticsItem}>
-          Positive feedback: {positivePercentage()}%
+          Positive feedback: {positivePercentage}%
         </li>
       </ul>
     </>
@@ -30,5 +30,5 @@ Statistics.propTypes = {
     bad: PropTypes.number,
   }),
   total: PropTypes.number,
-  positivePercentage: PropTypes.func,
+  positivePercentage: PropTypes.number,
 };
