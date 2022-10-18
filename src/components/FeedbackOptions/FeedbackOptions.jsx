@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
 import s from './FeedbackOptions.module.css';
 export const FeedbackOption = ({options,  onCounterFeedback}
-  // good,
-  // neutral,
-  // bad,
-  // onLeaveGoodFeedback,
-  // onLeaveNeutralFeedback,
-  // onLeaveBadFeedback,
+  
 ) => {
  
   return (
